@@ -3,47 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <title>Book Recommender System</title>
-   <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        .navbar {
+            background-color: #00a65a;
+        }
+        .navbar-brand, .nav > li > a {
+            color: white !important;
+        }
+        .hero {
+            background: linear-gradient(to right, #00a65a, #3dbd7d);
+            color: white;
+            text-align: center;
+            padding: 50px 0;
+        }
+        .hero h1 {
+            font-size: 3rem;
+        }
+        .book-card {
+            margin-bottom: 30px;
+        }
+        .book-card img {
+            max-height: 300px;
+            object-fit: cover;
+        }
+        .book-card .card-body {
+            background-color: #f8f9fa;
+        }
+        .book-card h2 {
+            font-size: 1.5rem;
+        }
+        .book-card .article-metadata {
+            margin-top: 10px;
+        }
+        .book-card:hover {
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
 </head>
-<style>
-    .text-white{
-         color:white
-    }
-</style>
-<body style = "background-color: white">
+<body>
 
-    <nav class="navbar" style = "background-color:#00a65a">
-        <a class = "navbar-brand">My Book Recommender</a>
-        <ul class = "nav navbar-nav">
-            <li><a href="/">Home</a></li>
-            <li><a href="/recommend">Recommend</a></li>
-            <li><a>Contact</a></li>
-        </ul>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to My Book Recommender</h1>
+            <p>Discover your next favorite book!</p>
+        </div>
+    </section>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand">My Book Recommender</a>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/recommend">Recommend</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
     </nav>
-    <div class = "container">
-        <div class ="row">
-            <div class="col-12">
-                <h1 class="text-black" style = "font-size:50px">Top 50 Books</h1>
-            </div>
 
-              {% for i in range(book_name|length) %}
-                <article class="media content-section">
-                    <div class="media-body">
-                        <img class="card-img-top" src="{{ image[i] }}">
+    <!-- Book List Section -->
+    <div class="container">
+        <h1 class="text-black" style="font-size: 50px; margin-top: 30px;">Top 50 Books</h1>
+        <div class="row">
+
+            {% for i in range(book_name|length) %}
+            <div class="col-md-4">
+                <div class="card book-card">
+                    <img class="card-img-top" src="{{ image[i] }}" alt="Book Image">
+                    <div class="card-body">
                         <h2><a class="article-title" href="#">{{ book_name[i] }}</a></h2>
                         <div class="article-metadata">
-                            <small class="text-muted">Rating : {{ rating[i] }}</small>&nbsp;<br>
-                            <small class="text-muted">Total Votes : {{ votes[i] }}</small><br>
+                            <small class="text-muted">Rating: {{ rating[i] }}</small><br>
+                            <small class="text-muted">Total Votes: {{ votes[i] }}</small><br>
                         </div>
-                        <a class="mr-2" href="#">Author : {{ author[i] }}</a><br>
-                        <a href="{{ image[i] }}">Image Link</a>
-                        <br>
+                        <a class="mr-2" href="#">Author: {{ author[i] }}</a><br>
+                        <a href="{{ image[i] }}" target="_blank">View Image</a>
                     </div>
-                </article>
+                </div>
+            </div>
+            {% endfor %}
 
-                {% endfor %}
         </div>
     </div>
+
 </body>
 </html>
